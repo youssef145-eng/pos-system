@@ -2,142 +2,613 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DASHBOARD</title>
+    <title>Point of Sale System</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
-
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .nav-tabs > li > a {
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 15px 25px;
+            transition: all 0.3s ease;
+        }
+        .nav-tabs > li > a:hover {
+            background-color: #f8f9fa;
+            border-color: transparent;
+        }
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px 5px 0 0;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background-color: #2ecc71;
+            border: none;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        .btn-warning {
+            background-color: #f1c40f;
+            border: none;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-warning:hover {
+            background-color: #f39c12;
+            transform: translateY(-2px);
+        }
+        .table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table thead {
+            background-color: #34495e;
+            color: white;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52,152,219,0.3);
+        }
+        .page-title {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .action-buttons .btn {
+            margin: 0 5px;
+            padding: 5px 10px;
+        }
+        .total-amount {
+            font-size: 1.2em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .total-amount span {
+            color: #27ae60;
+        }
+        .tab-content {
+            padding: 20px 0;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><i class="fa fa-shopping-cart"></i> Point of Sale System</a>
+            </div>
+        </div>
+    </nav>
 
-<div class="container">
-    <br>
-    <br>
-    <div class="row">
-        <div class=" col-md-9 ">
-            <a href="index.html" class="btn btn-primary">Dashboard</a>
-            <a href="products.html" class="btn btn-success">Products</a>
-            <a href="sales.html" class="btn btn-warning">Sales</a>
+    <div class="container">
+        <h2 class="page-title"><i class="fa fa-shopping-cart"></i> Point of Sale System</h2>
+        
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#dashboard" aria-controls="dashboard" role="tab" data-toggle="tab">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#products" aria-controls="products" role="tab" data-toggle="tab">
+                    <i class="fa fa-cubes"></i> Products
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#sales" aria-controls="sales" role="tab" data-toggle="tab">
+                    <i class="fa fa-line-chart"></i> Sales
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div role="tabpanel" class="tab-pane active" id="dashboard">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-barcode"></i> Scan Products</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="barcode"><i class="fa fa-barcode"></i> Barcode</label>
+                                    <input type="text" id="barcode" class="form-control" placeholder="Scan or enter barcode">
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Product Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="items">
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3" class="total-amount">
+                                                    <i class="fa fa-money"></i> Total: <span id="total">0.0</span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" onclick="saveOrder()">
+                                        <i class="fa fa-check"></i> Complete Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div role="tabpanel" class="tab-pane" id="products">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-list"></i> Product List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Product Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productsList">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-plus"></i> Add New Product</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="productName"><i class="fa fa-tag"></i> Product Name</label>
+                                    <input type="text" id="productName" class="form-control" placeholder="Enter product name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="productPrice"><i class="fa fa-dollar"></i> Product Price</label>
+                                    <input type="text" id="productPrice" class="form-control" placeholder="Enter product price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="barcode"><i class="fa fa-barcode"></i> Product Barcode</label>
+                                    <input type="text" id="barcode" class="form-control" placeholder="Enter product barcode">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" onclick="addProduct()">
+                                        <i class="fa fa-save"></i> Save Product
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Tab -->
+            <div role="tabpanel" class="tab-pane" id="sales">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-list"></i> Orders List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Order No</th>
+                                                <th>Total</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="orders">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><i class="fa fa-shopping-cart"></i> Order Details</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Product Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="orderDetails">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="container" style="margin-top: 50px;">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label for="barcode">Barcode : </label>
-                <input type="text" id="barcode" class="form-control">
-            </div>
 
-            <div class="form-group">
-                <table class="table ">
-                    <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Product Price</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody id="items">
-
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="3"><strong>Total : </strong> <span id="total">0.0</span></td>
-                    </tr>
-                    </tfoot>
-                </table>
+    <!-- Update Product Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Update Product: <span id="mtProductName"></span></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="mProductName"><i class="fa fa-tag"></i> Product Name</label>
+                                <input type="text" id="mProductName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="mProductPrice"><i class="fa fa-dollar"></i> Product Price</label>
+                                <input type="text" id="mProductPrice" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="mBarcode"><i class="fa fa-barcode"></i> Product Barcode</label>
+                                <input type="text" id="mBarcode" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                    <button onclick="saveUpdate()" type="button" class="btn btn-success">
+                        <i class="fa fa-save"></i> Save changes
+                    </button>
+                </div>
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary" onclick="saveOrder()">Complete</button>
-            </div>
-
         </div>
     </div>
-</div>
 
-</body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <script>
+        // Global variables
+        let items = [];
+        let total = 0.0;
+        let prId = null;
 
-<script>
+        // Initialize all tabs
+        $(document).ready(function () {
+            getProducts();
+            getOrders();
+            
+            // Barcode scanner event listener
+            let barcode = document.getElementById("barcode");
+            barcode.addEventListener("keydown", function (e) {
+                if (e.code === "Enter" || e.keyCode === 13) {
+                    getProduct(e);
+                }
+            });
 
-    let barcode = document.getElementById("barcode");
-    barcode.addEventListener("keydown", function (e) {
-        if (e.code === "Enter" || e.keyCode === 13) {  //checks whether the pressed key is "Enter"
-            getProduct(e);
+            // Tab change event
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if ($(e.target).attr('href') === '#products') {
+                    getProducts();
+                } else if ($(e.target).attr('href') === '#sales') {
+                    getOrders();
+                }
+            });
+        });
+
+        // Dashboard Functions
+        function getProduct(e) {
+            let body = $("#items").html();
+            const barcode = e.target.value;
+            $.ajax({
+                url: 'http://localhost:8080/products/getProductByBarcode?Barcode=' + barcode,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    body += '<tr id="row-' + resp.productId + '">' +
+                        '<td>' + resp.productName + '</td>' +
+                        '<td>$' + resp.productPrice + '</td>' +
+                        '<td class="action-buttons">' +
+                        '<button onclick="deleteRow(' + resp.productId + ',' + resp.productPrice + ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
+                        '</td>' +
+                        '</tr>';
+                    $("#items").html(body);
+
+                    items.push({
+                        productId: resp.productId,
+                        productPrice: resp.productPrice
+                    });
+
+                    total += resp.productPrice;
+                    $("#total").html('$' + total.toFixed(2));
+                    $("#barcode").val('').focus();
+                }
+            });
         }
-    });
 
+        function deleteRow(productId, productPrice) {
+            $("#row-" + productId).remove();
+            total -= productPrice;
+            $("#total").html('$' + total.toFixed(2));
+            items = $.grep(items, function (e) {
+                return e.productId != productId;
+            });
+        }
 
-    let items = [];
-    let total = 0.0;
-
-    // const barcode = e.target.value;
-    function getProduct(e) {
-        let body = $("#items").html();
-        const barcode = e.target.value;
-        $.ajax({
-            url: 'http://localhost:8080/products/getProductByBarcode?Barcode=' + barcode,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function (resp) {
-                console.log(resp);
-                body += ' <tr id="row-' + resp.productId + '">\n' +
-                    '                        <td>' + resp.productName + '</td>\n' +
-                    '                        <td>' + resp.productPrice + '</td>\n' +
-                    '                        <td>\n' +
-                    '                            <button onclick="deleteRow(' + resp.productId + ',' + resp.productPrice + ')" class="btn btn-danger btn-xs">X</button>\n' +
-                    '                        </td>\n' +
-                    '                    </tr>';
-                $("#items").html(body);
-
-                items.push({
-                    productId: resp.productId,
-                    productPrice: resp.productPrice
-                });
-
-                total += resp.productPrice;
-                $("#total").html(total);
-                JSON.stringify(items);
+        function saveOrder() {
+            if (items.length === 0) {
+                alert("Please add at least one product to the order!");
+                return;
             }
-        });
-    }
+            
+            $.ajax({
+                url: 'http://localhost:8080/order/save-order',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                type: 'POST',
+                data: JSON.stringify(items),
+                dataType: 'JSON',
+                success: function (resp) {
+                    alert("Order #" + resp.orderId + " has been successfully saved!");
+                    window.location.reload();
+                }
+            });
+        }
 
+        // Products Functions
+        function getProducts() {
+            let body = $("#productsList").html('');
+            $.ajax({
+                url: 'http://localhost:8080/products/getAllProducts',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    for (let i = 0; i < resp.length; i++) {
+                        body += '<tr id="row-' + resp[i].productId + '">' +
+                            '<td>' + resp[i].productName + '</td>' +
+                            '<td>$' + resp[i].productPrice + '</td>' +
+                            '<td class="action-buttons">' +
+                            '<button onclick="deleteProduct(' + resp[i].productId + ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
+                            '<button onclick="updateProduct(' + resp[i].productId + ')" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $("#productsList").html(body);
+                }
+            });
+        }
 
-    function deleteRow(productId, productPrice) {
-        $("#row-" + productId).remove();
-        total -= productPrice;
-        $("#total").html(total);
-        items = $.grep(items, function (e) {
-            return e.productId != productId;
-        });
-        console.log(items);
-    }
+        function addProduct() {
+            let data = {
+                productName: $("#productName").val(),
+                productPrice: $("#productPrice").val(),
+                barcode: $("#barcode").val()
+            };
+            $.ajax({
+                url: 'http://localhost:8080/products/add-product',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                data: JSON.stringify(data),
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (resp) {
+                    getProducts();
+                    // Clear form
+                    $("#productName").val('');
+                    $("#productPrice").val('');
+                    $("#barcode").val('');
+                }
+            });
+        }
 
-    function saveOrder() {
-        $.ajax({
-            url: 'http://localhost:8080/order/save-order',
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            type: 'POST',
-            data: JSON.stringify(items),
-            dataType: 'JSON',
-            success: function (resp) {
-                console.log(resp);
-                alert("Successfully saved Order NO : " + resp.orderId);
-                window.location.reload();
-            }
-        });
-    }
+        function deleteProduct(productId) {
+            $.ajax({
+                url: 'http://localhost:8080/products/delete-product?productId=' + productId,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    getProducts();
+                }
+            });
+        }
 
+        function updateProduct(productId) {
+            $("#updateModal").modal('show');
+            $.ajax({
+                url: 'http://localhost:8080/products/getProductById?productId=' + productId,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    prId = productId;
+                    $("#mtProductName").html(resp.productName);
+                    $("#mProductName").val(resp.productName);
+                    $("#mProductPrice").val(resp.productPrice);
+                    $("#mBarcode").val(resp.barcode);
+                }
+            });
+        }
 
-</script>
+        function saveUpdate() {
+            let productName = $("#mProductName").val();
+            let productPrice = $("#mProductPrice").val();
+            let productBarcode = $("#mBarcode").val();
+            $.ajax({
+                url: 'http://localhost:8080/products/update-product',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'POST',
+                data: JSON.stringify({
+                    productId: prId,
+                    productName: productName,
+                    productPrice: productPrice,
+                    barcode: productBarcode
+                }),
+                success: function (resp) {
+                    // Close the modal first
+                    $("#updateModal").modal('hide');
+                    // Clear the form fields
+                    $("#mProductName").val('');
+                    $("#mProductPrice").val('');
+                    $("#mBarcode").val('');
+                    // Refresh the product list
+                    getProducts();
+                    // Show success message
+                    alert("Product updated successfully!");
+                },
+                error: function(xhr, status, error) {
+                    alert("Error updating product: " + error);
+                }
+            });
+        }
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        // Sales Functions
+        function getOrders() {
+            let body = $("#orders").html('');
+            $.ajax({
+                url: 'http://localhost:8080/order/getAllOrders',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    for (let i = 0; i < resp.length; i++) {
+                        body += '<tr id="row-' + resp[i].orderId + '">' +
+                            '<td>#' + resp[i].orderId + '</td>' +
+                            '<td>$' + resp[i].total + '</td>' +
+                            '<td class="action-buttons">' +
+                            '<button onclick="getSales(' + resp[i].orderId + ')" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View Details</button>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $("#orders").html(body);
+                }
+            });
+        }
 
+        function getSales(orderId) {
+            let body = '';
+            $.ajax({
+                url: 'http://localhost:8080/sales/findSalesByOrderId?orderId=' + orderId,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp) {
+                    for (let i = 0; i < resp.length; i++) {
+                        const product = resp[i].productEntity;
+                        if (product) {
+                            body += '<tr id="row-' + product.productId + '">' +
+                                '<td>' + product.productName + '</td>' +
+                                '<td>$' + product.productPrice + '</td>' +
+                                '</tr>';
+                        } else {
+                            body += '<tr><td colspan="2" class="text-center">No product information available</td></tr>';
+                        }
+                    }
+                    $("#orderDetails").html(body);
+                }
+            });
+        }
+    </script>
+</body>
 </html>
