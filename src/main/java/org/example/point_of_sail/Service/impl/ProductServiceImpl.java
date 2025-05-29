@@ -1,9 +1,9 @@
-package org.example.point_of_sail.Dao;
+package org.example.point_of_sail.Service.impl;
 
-import org.example.point_of_sail.Entity.ProductEntity;
-import org.example.point_of_sail.Repository.ProductRepo;
+import org.example.point_of_sail.Model.Repository.Entity.ProductEntity;
+import org.example.point_of_sail.Model.Repository.ProductRepo;
+import org.example.point_of_sail.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductDao {
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepo productRepo;

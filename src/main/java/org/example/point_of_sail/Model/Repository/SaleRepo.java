@@ -1,6 +1,6 @@
-package org.example.point_of_sail.Repository;
+package org.example.point_of_sail.Model.Repository;
 
-import org.example.point_of_sail.Entity.SaleEntity;
+import org.example.point_of_sail.Model.Repository.Entity.SaleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

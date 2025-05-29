@@ -1,6 +1,5 @@
-package org.example.point_of_sail.Entity;
+package org.example.point_of_sail.Model.Repository.Entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 

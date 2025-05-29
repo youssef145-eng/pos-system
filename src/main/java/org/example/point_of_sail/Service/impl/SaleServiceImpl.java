@@ -1,39 +1,37 @@
-package org.example.point_of_sail.Dao;
+package org.example.point_of_sail.Service.impl;
 
 import lombok.AllArgsConstructor;
-import org.example.point_of_sail.Dto.OrderDto;
-import org.example.point_of_sail.Entity.OrderEntity;
-import org.example.point_of_sail.Entity.SaleEntity;
-import org.example.point_of_sail.Repository.SaleRepo;
+import org.example.point_of_sail.Model.Repository.Dto.OrderDto;
+import org.example.point_of_sail.Model.Repository.Entity.OrderEntity;
+import org.example.point_of_sail.Model.Repository.Entity.SaleEntity;
+import org.example.point_of_sail.Model.Repository.SaleRepo;
+import org.example.point_of_sail.Service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 @AllArgsConstructor
-public class SaleDao {
+public class SaleServiceImpl implements SaleService {
     @Autowired
     private SaleRepo saleRepo;
     @Autowired
-    private OrderDao orderDao;
+    private OrderServiceImpl orderServiceImpl;
 
     public OrderEntity saveSale(List<OrderDto> order) {
         if (order.size() == 0)
             return null;
 
-        // حفظ order أولاً
-        OrderEntity orderEntity = this.orderDao.saveOrder(order);
+        OrderEntity orderEntity = this.orderServiceImpl.saveOrder(order);
 
-        // التأكد من أن orderEntity يحتوي على orderId الصحيح بعد الحفظ
         if (orderEntity.getOrderId() == 0) {
             throw new RuntimeException("Failed to save order, order ID is not generated.");
         }
 
-        // حفظ SaleEntity بعد التأكد من أن orderEntity يحتوي على orderId الصحيح
         order.forEach(o -> {
             SaleEntity saleEntity = new SaleEntity();
             saleEntity.setProductId(o.getProductId());
-            saleEntity.setOrderId(orderEntity.getOrderId()); // التأكد من تعيين orderId بشكل صحيح
+            saleEntity.setOrderId(orderEntity.getOrderId());
             this.saleRepo.save(saleEntity);
         });
 

@@ -1,4 +1,4 @@
-package org.example.point_of_sail.Dto;
+package org.example.point_of_sail.Model.Repository.Dto;
 
 import lombok.Data;
 

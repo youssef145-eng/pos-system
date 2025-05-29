@@ -1,9 +1,9 @@
 package org.example.point_of_sail.Controller;
 
-import org.example.point_of_sail.Dao.OrderDao;
-import org.example.point_of_sail.Dao.SaleDao;
-import org.example.point_of_sail.Dto.OrderDto;
-import org.example.point_of_sail.Entity.OrderEntity;
+import org.example.point_of_sail.Service.impl.OrderServiceImpl;
+import org.example.point_of_sail.Service.impl.SaleServiceImpl;
+import org.example.point_of_sail.Model.Repository.Dto.OrderDto;
+import org.example.point_of_sail.Model.Repository.Entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,19 +14,19 @@ import java.util.List;
 @CrossOrigin
 public class OrderController {
     @Autowired
-    private OrderDao orderDao;
+    private OrderServiceImpl orderServiceImpl;
 
 @Autowired
-private SaleDao saleDao;
+private SaleServiceImpl saleServiceImpl;
     // product ID and  price
 @PostMapping("/save-order")
     public OrderEntity saveOrder(@RequestBody List<OrderDto>order) {
-        return saleDao.saveSale(order);
+        return saleServiceImpl.saveSale(order);
     }
 
     @GetMapping("/getAllOrders")
     public List<OrderEntity> getAllOrders() {
-    return orderDao.getAllOrders();
+    return orderServiceImpl.getAllOrders();
     }
 
 }

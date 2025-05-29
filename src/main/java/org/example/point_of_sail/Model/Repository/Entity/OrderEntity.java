@@ -1,4 +1,4 @@
-package org.example.point_of_sail.Entity;
+package org.example.point_of_sail.Model.Repository.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

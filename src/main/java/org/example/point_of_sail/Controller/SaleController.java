@@ -1,7 +1,7 @@
 package org.example.point_of_sail.Controller;
 
-import org.example.point_of_sail.Dao.SaleDao;
-import org.example.point_of_sail.Entity.SaleEntity;
+import org.example.point_of_sail.Service.impl.SaleServiceImpl;
+import org.example.point_of_sail.Model.Repository.Entity.SaleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ public class SaleController {
 
 
     @Autowired
-    private SaleDao saleDao;
+    private SaleServiceImpl saleServiceImpl;
 @GetMapping("/getAllSales")
     public List<SaleEntity> getAllSales() {
-        return this.saleDao.getAllSales();
+        return this.saleServiceImpl.getAllSales();
     }
 @GetMapping("/findSalesByOrderId")
     public List<SaleEntity> findSalesByOrderId(@RequestParam Integer orderId) {
-        return this.saleDao.findSalesByOrderId(orderId);
+        return this.saleServiceImpl.findSalesByOrderId(orderId);
     }
 }
